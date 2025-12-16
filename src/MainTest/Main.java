@@ -99,18 +99,21 @@ public class Main {
 	        System.out.println("═══ YENİ KULLANICI EKLEME ═══");
 	        
 	        int userId = getIntInput("Kullanıcı ID: ");
-	        System.out.print("Ad: ");
-	        String firstName = scanner1.nextLine();
-	        System.out.print("Soyad: ");
-	        String lastName = scanner1.nextLine();
-	        System.out.print("Email: ");
-	        String email = scanner1.nextLine();
-	        int age = getIntInput("Yaş: ");
-	        System.out.print("Şifre: ");
-	        String password = scanner1.nextLine();
-	        
-	        system.addUser(userId, firstName, lastName, email, age, password);
-	        System.out.println();
+	        if(BankSystemManager.findUser(userId) == null) {
+	        	System.out.print("Ad: ");
+	 	        String firstName = scanner1.nextLine();
+	 	        System.out.print("Soyad: ");
+	 	        String lastName = scanner1.nextLine();
+	 	        System.out.print("Email: ");
+	 	        String email = scanner1.nextLine();
+	 	        int age = getIntInput("Yaş: ");
+	 	        System.out.print("Şifre: ");
+	 	        String password = scanner1.nextLine();
+	 	        
+	 	        system.addUser(userId, firstName, lastName, email, age, password);
+	 	        System.out.println();
+	        }
+	       
 	    }
 	    
 	    private static void addAccountMenu() {

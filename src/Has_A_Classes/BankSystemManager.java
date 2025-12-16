@@ -16,29 +16,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BankSystemManager {
-    private ArrayList<User> users;
-    private Set<String> registeredEmails;
-    
-    public BankSystemManager() {
-        this.users = new ArrayList<>();
-        this.registeredEmails = new HashSet<>();
-    }
+    private static ArrayList<User> users = new ArrayList<>();
+    private static Set<String> registeredEmails = new HashSet<>();
     
     // Add method
-    public void addUser(int id, String firstName, String lastName, 
+    public static void addUser(int id, String firstName, String lastName, 
                        String email, int age, String password) {
-        if (!registeredEmails.contains(email)) {
-            User user = new User(id, firstName, lastName, email, age, password);
-            users.add(user);
-            registeredEmails.add(email);
-            System.out.println("User added successfully: " + firstName + " " + lastName);
-        } else {
-            System.out.println("Email already registered!");
-        }
+    	if (findUser(id) == null) {
+            if (!registeredEmails.contains(email)) {
+                User user = new User(id, firstName, lastName, email, age, password);
+                users.add(user);
+                registeredEmails.add(email);
+                System.out.println("User added successfully: " + firstName + " " + lastName);
+            } else {
+                System.out.println("Email already registered!");
+            }
+    	}
     }
     
     // Add account to user
-    public void addAccountToUser(int userId, String type, double initialBalance, 
+    public static void addAccountToUser(int userId, String type, double initialBalance, 
                                 double extraParam) {
         User user = findUser(userId);
         if (user != null) {
@@ -62,7 +59,7 @@ public class BankSystemManager {
     }
     
     // Search method
-    public User findUser(int userId) {
+    public static User findUser(int userId) {
         for (User user : users) {
             if (user.getUserId() == userId) {
                 return user;
@@ -72,7 +69,7 @@ public class BankSystemManager {
     }
     
     // Delete method
-    public boolean deleteUser(int userId) {
+    public static boolean deleteUser(int userId) {
         User user = findUser(userId);
         if (user != null) {
             users.remove(user);
@@ -84,7 +81,7 @@ public class BankSystemManager {
     }
     
     // Deposit method
-    public void deposit(int userId, int accountNum, double amount) {
+    public static void deposit(int userId, int accountNum, double amount) {
         User user = findUser(userId);
         if (user != null) {
             BankAccount account = user.getAccount(accountNum);
@@ -101,7 +98,7 @@ public class BankSystemManager {
     }
     
     // Withdraw method
-    public void withdraw(int userId, int accountNum, double amount) {
+    public static void withdraw(int userId, int accountNum, double amount) {
         User user = findUser(userId);
         if (user != null) {
             BankAccount account = user.getAccount(accountNum);
@@ -122,7 +119,7 @@ public class BankSystemManager {
     }
     
     // Transfer method
-    public boolean transfer(int fromUserId, int fromAccNum, 
+    public static boolean transfer(int fromUserId, int fromAccNum, 
                           String toIBAN, double amount) {
         User fromUser = findUser(fromUserId);
         if (fromUser == null) {
@@ -156,7 +153,7 @@ public class BankSystemManager {
     }
     
     // Calculation method
-    public double calculateTotalSystemBalance() {
+    public static double calculateTotalSystemBalance() {
         double total = 0;
         for (User user : users) {
             total += user.getTotalBalance();
@@ -165,7 +162,7 @@ public class BankSystemManager {
     }
     
     // Display all users
-    public String displayAll() {
+    public static String displayAll() {
         if (users.isEmpty()) {
             return "No users in the system.";
         }
@@ -185,7 +182,7 @@ public class BankSystemManager {
     }
     
     // Display specific user
-    public String display(int userId) {
+    public static String display(int userId) {
         User user = findUser(userId);
         if (user != null) {
             return user.toString();
@@ -194,7 +191,7 @@ public class BankSystemManager {
     }
     
     // Helper method
-    private BankAccount findAccountByIBAN(String iban) {
+    private static BankAccount findAccountByIBAN(String iban) {
         for (User user : users) {
             for (BankAccount account : user.getAccounts()) {
                 if (account.getIban().equals(iban)) {
@@ -206,7 +203,7 @@ public class BankSystemManager {
     }
     
     // Helper method
-    private int generateAccountNumber() {
+    private static int generateAccountNumber() {
         return (int) (Math.random() * 900000) + 100000;
     }
 }

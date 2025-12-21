@@ -94,7 +94,7 @@ public class UserManagementGUI extends JFrame {
         clearBtn.addActionListener(e -> clearFields());
         contentPane.add(clearBtn);
         
-        statisticsBtn = new JButton("STATISTICS");
+        statisticsBtn = new JButton("INFORMATION");
         statisticsBtn.setBounds(20, 300, 150, 30);
         statisticsBtn.addActionListener(e -> showStatistics());
         contentPane.add(statisticsBtn);
@@ -132,9 +132,10 @@ public class UserManagementGUI extends JFrame {
                 return;
             }
             
-            BankSystemManager.addUser(id, firstName, lastName, email, age, password);
-            displayArea.setText("User added successfully");
-            clearFields();
+            boolean check = BankSystemManager.addUser(id, firstName, lastName, email, age, password);
+            if(check) displayArea.setText("User added successfully");
+            else displayArea.setText("User exist");
+            //clearFields();
         } catch (NumberFormatException e) {
             displayArea.setText("Invalid input! Check ID and Age fields");
         }

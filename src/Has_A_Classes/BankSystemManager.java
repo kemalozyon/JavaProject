@@ -20,7 +20,7 @@ public class BankSystemManager {
     private static Set<String> registeredEmails = new HashSet<>();
     
     // Add method
-    public static void addUser(int id, String firstName, String lastName, 
+    public static boolean addUser(int id, String firstName, String lastName, 
                        String email, int age, String password) {
     	if (findUser(id) == null) {
             if (!registeredEmails.contains(email)) {
@@ -28,10 +28,13 @@ public class BankSystemManager {
                 users.add(user);
                 registeredEmails.add(email);
                 System.out.println("User added successfully: " + firstName + " " + lastName);
+                return true;
             } else {
                 System.out.println("Email already registered!");
+                return false;
             }
     	}
+    	return false;
     }
     
     // Add account to user

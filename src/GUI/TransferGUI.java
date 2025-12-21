@@ -64,7 +64,7 @@ public class TransferGUI extends JFrame {
         clearBtn.addActionListener(e -> clearFields());
         contentPane.add(clearBtn);
         
-        statisticsBtn = new JButton("STATISTICS");
+        statisticsBtn = new JButton("INFORMATION");
         statisticsBtn.setBounds(20, 190, 120, 30);
         statisticsBtn.addActionListener(e -> showStatistics());
         contentPane.add(statisticsBtn);
@@ -116,24 +116,10 @@ public class TransferGUI extends JFrame {
     }
     
     private void showStatistics() {
-        int totalUsers = User.getTotalUsers();
-        int totalAccounts = BankAccount.getTotalAccountsCreated();
-        double totalBalance = BankSystemManager.calculateTotalSystemBalance();
+    	String report = BankSystemManager.displayAll();
+        displayArea.setText(report);
         
-        StringBuilder stats = new StringBuilder();
-        stats.append("========== TRANSFER STATISTICS ==========\n\n");
-        stats.append("Total Users: ").append(totalUsers).append("\n");
-        stats.append("Total Accounts: ").append(totalAccounts).append("\n");
-        stats.append("Total System Balance: $").append(String.format("%.2f", totalBalance)).append("\n\n");
-        
-        if (totalUsers > 0) {
-            double avgBalance = totalBalance / totalUsers;
-            stats.append("Average Balance per User: $").append(String.format("%.2f", avgBalance)).append("\n");
-        }
-        
-        stats.append("\n=========================================");
-        
-        displayArea.setText(stats.toString());
+ 
     }
     
     private void clearFields() {

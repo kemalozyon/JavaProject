@@ -33,7 +33,12 @@ public class SavingsAccount extends BankAccount{
     
     @Override
     public String toString() {
-        return super.toString() + " | Interest Rate: " + 
+        return AccType() + super.toString() + " | Interest Rate: " + 
                String.format("%.2f", interestRate) + "%";
     }
+    @Override
+	public String AccType() {
+		// TODO Auto-generated method stub
+		return "Saving\n";
+	}
 }

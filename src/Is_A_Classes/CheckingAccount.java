@@ -28,7 +28,13 @@ public class CheckingAccount extends BankAccount{
     
     @Override
     public String toString() {
-        return super.toString() + " | Overdraft Limit: $" + 
+        return AccType() + super.toString() + " | Overdraft Limit: $" + 
                String.format("%.2f", overdraftLimit);
     }
+
+	@Override
+	public String AccType() {
+		// TODO Auto-generated method stub
+		return "Checking\n";
+	}
 }

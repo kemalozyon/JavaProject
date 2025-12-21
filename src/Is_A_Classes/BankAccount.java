@@ -37,7 +37,7 @@ public abstract class BankAccount implements Withdrawable{
             balance += amount;
         }
     }
-    
+    public abstract String AccType();
     public double getBalance() {
         return balance;
     }

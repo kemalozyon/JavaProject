@@ -77,6 +77,7 @@ public class BankSystemManager {
         if (user != null) {
             users.remove(user);
             System.out.println("User deleted successfully!");
+            User.setTotalUsers(User.getTotalUsers() - 1);
             return true;
         }
         System.out.println("User not found!");

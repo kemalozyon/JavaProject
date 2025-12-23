@@ -36,6 +36,7 @@ public class User {
         return totalUsers;
     }
     
+    
     public boolean addAccount(BankAccount account) {
         if (account != null && !accounts.contains(account)) {
             accounts.add(account);
